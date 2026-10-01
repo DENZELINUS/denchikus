@@ -157,8 +157,8 @@ function formatMoney(value) {
     style: "currency",
     currency: meta.currency,
     currencyDisplay: "code",
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
+    minimumFractionDigits: 3,
+    maximumFractionDigits: 3
   }).format(value);
 }
 
