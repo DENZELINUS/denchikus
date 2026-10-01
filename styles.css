@@ -97,20 +97,13 @@ body.has-custom-background::before {
   background-position: center;
   background-size: cover;
 }
-body.has-custom-background .settings-dialog {
+.ghost-button {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.18);
+}
+.settings-dialog {
+  background: rgba(15, 20, 17, 0.9);
   color: #eef4ef;
-  background: rgba(12, 16, 14, 0.9);
-  border-color: rgba(255, 255, 255, 0.14);
-}
-
-body.has-custom-background .dialog-header {
-  background: rgba(12, 16, 14, 0.94);
-}
-
-body.has-custom-background .helper-text,
-body.has-custom-background .field,
-body.has-custom-background .section-heading h3 {
-  color: rgba(236, 244, 239, 0.86);
 }
 .backdrop {
   position: fixed;
