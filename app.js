@@ -43,7 +43,6 @@ const el = {
   settingsOpen: document.querySelector("#settingsOpen"),
   settingsClose: document.querySelector("#settingsClose"),
   settingsForm: document.querySelector("#settingsForm"),
-  settingsCountryBadge: document.querySelector("#settingsCountryBadge"),
   solvedRate: document.querySelector("#solvedRate"),
   escalatedRate: document.querySelector("#escalatedRate"),
   currencySymbols: document.querySelectorAll(".currency-symbol"),
