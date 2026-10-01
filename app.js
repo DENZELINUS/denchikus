@@ -290,7 +290,7 @@ el.settingsForm.addEventListener("submit", async (event) => {
     render(el.earnings);
     el.settingsDialog.close();
   } catch (error) {
-    el.backgroundMessage.textContent = "Не удалось сохранить настройки в браузере.";
+    el.backgroundMessage.textContent = "";
     el.backgroundMessage.classList.add("error");
     console.error(error);
   }
