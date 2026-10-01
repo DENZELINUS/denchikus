@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111412">
+  <meta name="description" content="Локальный счётчик звонков и заработка для специалиста поддержки.">
+  <title>Счётчик саппорта</title>
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти к счётчику</a>
+  <div class="backdrop" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#main" aria-label="Счётчик саппорта — на главную">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M7 18.5V14a9 9 0 0 1 18 0v4.5"/>
+        <path d="M7 17H5.75A2.75 2.75 0 0 0 3 19.75v2.5A2.75 2.75 0 0 0 5.75 25H8V17H7Zm18 0h1.25A2.75 2.75 0 0 1 29 19.75v2.5A2.75 2.75 0 0 1 26.25 25H24v-8h1Z"/>
+        <path d="M24 25c-1.2 2-3 3-5.5 3H16"/>
+        <circle cx="14" cy="28" r="2"/>
+      </svg>
+      <span>Support Counter</span>
+    </a>
+
+    <div class="top-actions">
+      <button class="icon-button" id="themeToggle" type="button" aria-label="Переключить тему" title="Переключить тему">
+        <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"/></svg>
+        <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+      </button>
+      <button class="secondary-button" id="settingsOpen" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.83 2.83-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.1V21h-4v-.1A1.7 1.7 0 0 0 8.6 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.83-2.83.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.1-.4H3v-4h.1A1.7 1.7 0 0 0 4.6 8.6a1.7 1.7 0 0 0-.34-1.88l-.06-.06 2.83-2.83.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.1V3h4v.1A1.7 1.7 0 0 0 15.4 4.6a1.7 1.7 0 0 0 1.88-.34l.06-.06 2.83 2.83-.06.06A1.7 1.7 0 0 0 19.4 9c.15.4.4.75.74 1 .3.25.7.4 1.1.4h.1v4h-.1a1.7 1.7 0 0 0-1.84.6Z"/></svg>
+        <span>Настройки</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main" class="app-shell">
+    <section class="intro" aria-labelledby="pageTitle">
+      <div>
+        <p class="eyebrow">Рабочая смена</p>
+        <h1 id="pageTitle">Статистика саппорта</h1>
+      </div>
+
+      <fieldset class="country-control">
+        <legend class="sr-only">Выберите страну</legend>
+        <input id="countryRU" type="radio" name="country" value="RU" checked>
+        <label for="countryRU">РФ</label>
+        <input id="countryBY" type="radio" name="country" value="BY">
+        <label for="countryBY">РБ</label>
+        <span class="country-thumb" aria-hidden="true"></span>
+      </fieldset>
+    </section>
+
+    <section class="counter-grid" aria-label="Счётчики обращений">
+      <article class="counter-card">
+        <div class="counter-copy">
+          <p class="counter-kicker">Без передачи</p>
+          <h2>Решено самостоятельно</h2>
+        </div>
+        <div class="stepper">
+          <button class="step-button" type="button" data-counter="solved" data-delta="-1" aria-label="Уменьшить решённые самостоятельно">−</button>
+          <output id="solvedValue" class="counter-value" aria-live="polite">0</output>
+          <button class="step-button step-button--accent" type="button" data-counter="solved" data-delta="1" aria-label="Увеличить решённые самостоятельно">+</button>
+        </div>
+      </article>
+
+      <article class="counter-card">
+        <div class="counter-copy">
+          <p class="counter-kicker">Передано дальше</p>
+          <h2>Эскалировано</h2>
+        </div>
+        <div class="stepper">
+          <button class="step-button" type="button" data-counter="escalated" data-delta="-1" aria-label="Уменьшить эскалации">−</button>
+          <output id="escalatedValue" class="counter-value" aria-live="polite">0</output>
+          <button class="step-button step-button--accent" type="button" data-counter="escalated" data-delta="1" aria-label="Увеличить эскалации">+</button>
+        </div>
+      </article>
+
+      <article class="counter-card">
+        <div class="counter-copy">
+          <p class="counter-kicker">После звонка</p>
+          <h2>Запрос оценки</h2>
+        </div>
+        <div class="stepper">
+          <button class="step-button" type="button" data-counter="ratingRequests" data-delta="-1" aria-label="Уменьшить запросы оценки">−</button>
+          <output id="ratingValue" class="counter-value" aria-live="polite">0</output>
+          <button class="step-button step-button--accent" type="button" data-counter="ratingRequests" data-delta="1" aria-label="Увеличить запросы оценки">+</button>
+        </div>
+      </article>
+    </section>
+
+    <section class="dashboard" aria-label="Итоги смены">
+      <article class="metric-card metric-card--primary">
+        <div>
+          <p>Звонки</p>
+          <output id="callsValue" class="metric-value" aria-live="polite">0</output>
+        </div>
+        <button class="ghost-button" id="resetButton" type="button">Сбросить</button>
+      </article>
+
+      <article class="metric-card">
+        <p>Процент эскалаций</p>
+        <output id="escalationPercent" class="metric-value metric-value--small" aria-live="polite">0%</output>
+        <div class="progress-track" aria-hidden="true"><span id="escalationBar"></span></div>
+      </article>
+
+      <article class="metric-card">
+        <p>Запросы оценки</p>
+        <output id="ratingPercent" class="metric-value metric-value--small" aria-live="polite">0%</output>
+        <div class="progress-track" aria-hidden="true"><span id="ratingBar"></span></div>
+      </article>
+
+      <article class="earnings-card">
+        <div>
+          <p>Общий заработок</p>
+          <output id="earningsValue" class="earnings-value" aria-live="polite">0,00 ₽</output>
+          <span id="rateHint" class="rate-hint">Ставки не заданы</span>
+        </div>
+        <label class="double-toggle" for="doublePay">
+          <input id="doublePay" type="checkbox">
+          <span class="toggle-track" aria-hidden="true"><span></span></span>
+          <span class="toggle-label">×2</span>
+        </label>
+      </article>
+    </section>
+  </main>
+
+  <dialog id="settingsDialog" class="settings-dialog" aria-labelledby="settingsTitle">
+    <form id="settingsForm" method="dialog">
+      <div class="dialog-header">
+        <div>
+          <p class="eyebrow">Персонализация</p>
+          <h2 id="settingsTitle">Настройки</h2>
+        </div>
+        <button class="icon-button" id="settingsClose" type="button" aria-label="Закрыть настройки" title="Закрыть">×</button>
+      </div>
+
+      <section class="settings-section" aria-labelledby="ratesTitle">
+        <div class="section-heading">
+          <h3 id="ratesTitle">Стоимость звонка</h3>
+          <span id="settingsCountryBadge" class="badge">РФ · ₽</span>
+        </div>
+        <div class="field-grid">
+          <label class="field">
+            <span>Решено самостоятельно</span>
+            <span class="input-wrap"><input id="solvedRate" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0,00"><span class="currency-symbol">₽</span></span>
+          </label>
+          <label class="field">
+            <span>Эскалация</span>
+            <span class="input-wrap"><input id="escalatedRate" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0,00"><span class="currency-symbol">₽</span></span>
+          </label>
+        </div>
+        <p class="helper-text">Ставки сохраняются отдельно для РФ и РБ.</p>
+      </section>
+
+      <section class="settings-section" aria-labelledby="backgroundTitle">
+        <div class="section-heading">
+          <h3 id="backgroundTitle">Фон</h3>
+          <span class="badge">Личный</span>
+        </div>
+        <div id="backgroundPreview" class="background-preview" role="img" aria-label="Предпросмотр выбранного фона">
+          <span>Предпросмотр</span>
+        </div>
+        <div class="background-actions">
+          <label class="file-button" for="backgroundInput">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0L7 9m5-5 5 5M5 15v4h14v-4"/></svg>
+            Выбрать фото
+          </label>
+          <input id="backgroundInput" class="sr-only" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
+          <button class="ghost-button" id="backgroundReset" type="button">Вернуть стандартный</button>
+        </div>
+        <p id="backgroundMessage" class="helper-text" aria-live="polite">PNG, JPG, WebP или GIF до 12 МБ. Фото хранится только в этом браузере.</p>
+      </section>
+
+      <div class="dialog-footer">
+        <button class="primary-button" id="settingsSave" value="save" type="submit">Сохранить</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true">
+    <span>Счётчики сброшены</span>
+    <button id="undoReset" type="button">Отменить</button>
+  </div>
+</body>
+</html>
