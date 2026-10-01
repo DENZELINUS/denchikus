@@ -153,12 +153,12 @@ function formatPercent(value) {
 
 function formatMoney(value) {
   const meta = COUNTRY_META[state.country];
-  return new Intl.NumberFormat(meta.locale, {
-    style: "currency",
-    currency: meta.currency,
+  const number = new Intl.NumberFormat(meta.locale, {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   }).format(value);
+
+  return `${number} БО`;
 }
 
 function animateOutput(output) {
