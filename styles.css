@@ -97,14 +97,6 @@ body.has-custom-background::before {
   background-position: center;
   background-size: cover;
 }
-.ghost-button {
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.18);
-}
-.settings-dialog {
-  background: rgba(15, 20, 17, 0.9);
-  color: #eef4ef;
-}
 .backdrop {
   position: fixed;
   inset: 0;
@@ -260,4 +252,118 @@ h1 { max-width: 20ch; font-size: var(--text-xl); line-height: 1.1; letter-spacin
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+/*FIX: контраст окна настроек при светлом пользовательском фоне ===== */
+
+body.has-custom-background .settings-dialog {
+  color: #eef4ef;
+  background: rgba(14, 18, 16, 0.90);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(18px) saturate(115%);
+  -webkit-backdrop-filter: blur(18px) saturate(115%);
+}
+
+body.has-custom-background .settings-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+body.has-custom-background .dialog-header {
+  background: rgba(14, 18, 16, 0.94);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body.has-custom-background .dialog-header h2,
+body.has-custom-background .settings-section h3,
+body.has-custom-background .section-heading h3,
+body.has-custom-background .field > span:first-child {
+  color: #f3f7f4;
+}
+
+body.has-custom-background .helper-text,
+body.has-custom-background .rate-hint,
+body.has-custom-background .field,
+body.has-custom-background .metric-card > p,
+body.has-custom-background .earnings-card p {
+  color: rgba(231, 239, 234, 0.82);
+}
+
+body.has-custom-background .badge {
+  color: #8ff0cb;
+  background: rgba(48, 119, 93, 0.28);
+  border: 1px solid rgba(143, 240, 203, 0.16);
+}
+
+body.has-custom-background .input-wrap input {
+  color: #f5fbf7;
+  background: rgba(56, 63, 59, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+body.has-custom-background .input-wrap input::placeholder {
+  color: rgba(214, 224, 218, 0.48);
+}
+
+body.has-custom-background .input-wrap input:hover {
+  border-color: rgba(143, 240, 203, 0.28);
+}
+
+body.has-custom-background .input-wrap input:focus {
+  border-color: #7de5be;
+  outline: 2px solid rgba(125, 229, 190, 0.18);
+}
+
+body.has-custom-background .currency-symbol {
+  color: rgba(231, 239, 234, 0.78);
+}
+
+body.has-custom-background .background-preview span {
+  color: #f4fbf7;
+  background: rgba(28, 33, 30, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+body.has-custom-background .primary-button,
+body.has-custom-background .file-button {
+  color: #102018;
+  background: #7de5be;
+  border: 1px solid transparent;
+}
+
+body.has-custom-background .primary-button:hover,
+body.has-custom-background .file-button:hover {
+  background: #97efd0;
+}
+
+body.has-custom-background .ghost-button,
+body.has-custom-background .secondary-button {
+  color: #f3f7f4;
+  background: rgba(28, 33, 30, 0.74);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+body.has-custom-background .ghost-button:hover,
+body.has-custom-background .secondary-button:hover {
+  background: rgba(38, 45, 41, 0.92);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+body.has-custom-background .icon-button {
+  color: #f3f7f4;
+  background: rgba(28, 33, 30, 0.74);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+body.has-custom-background .icon-button:hover {
+  background: rgba(38, 45, 41, 0.92);
+}
+
+body.has-custom-background .dialog-footer {
+  background: rgba(14, 18, 16, 0.90);
+}
+
+body.has-custom-background .settings-section {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
