@@ -169,8 +169,11 @@ function animateOutput(output) {
 function updateRateForm() {
   const meta = COUNTRY_META[state.country];
   const rates = state.rates[state.country];
-  el.settingsCountryBadge.textContent = `${meta.label} · ${meta.symbol}`;
-  el.currencySymbols.forEach((node) => { node.textContent = meta.symbol; });
+
+  el.currencySymbols.forEach((node) => {
+    node.textContent = meta.symbol;
+  });
+
   el.solvedRate.value = rates.solved || "";
   el.escalatedRate.value = rates.escalated || "";
 }
