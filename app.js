@@ -14,8 +14,8 @@ const DEFAULT_STATE = {
 };
 
 const COUNTRY_META = {
-  RU: { locale: "ru-RU", currency: "RUB", symbol: "₽", label: "РФ" },
-  BY: { locale: "ru-BY", currency: "BYN", symbol: "Br", label: "РБ" }
+  RU: { locale: "ru-RU", currency: "RUB", symbol: "БО", label: "РФ" },
+  BY: { locale: "ru-BY", currency: "BYN", symbol: "БО", label: "РБ" }
 };
 
 let state = structuredClone(DEFAULT_STATE);
